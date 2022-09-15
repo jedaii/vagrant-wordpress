@@ -16,13 +16,15 @@ Vagrant.configure("2") do |config|
           server.vm.provision "file", source: file['source'], destination: "/tmp/"
         end
       end
-      servers['scripts'].each do |script|
-          server.vm.provision "shell", path: script['path'],
-            env: {
-              "DBUSER" => "#{servers['dbuser']}",
-              "DBPASSWORD" => "#{servers['dbpassword']}",
-              "DBNAME" => "#{servers['dbname']}"
-            }
+      if servers['scripts']
+        servers['scripts'].each do |script|
+            server.vm.provision "shell", path: script['path'],
+              env: {
+                "DBUSER" => "#{servers['dbuser']}",
+                "DBPASSWORD" => "#{servers['dbpassword']}",
+                "DBNAME" => "#{servers['dbname']}"
+              }
+        end
       end
 
       server.vm.provider "virtualbox" do |vb|

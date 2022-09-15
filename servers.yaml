@@ -22,3 +22,15 @@
   dbuser: "mysql"
   dbpassword: "dbpassword"
   dbname: "wordpress_db"
+- name: lb
+  nics:
+    - type: "private_network"
+      ip: "192.168.56.200"
+    - type: "public_network"
+      ip: "192.168.1.200" #en0: Ethernet
+  ram: 512
+  files:
+    file3:
+      source: "lb/wordpress-loadbalancer.conf"
+  scripts:
+    - path: "provision/lb-configure.sh"
