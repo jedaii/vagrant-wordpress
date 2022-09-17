@@ -3,7 +3,8 @@
   nics:
     - type: "private_network"
       ip: "192.168.56.10"
-  ram: "512"
+  ram: 400
+  count: 2
   files:
     file1:
       source: "wp/nginx/wordpress.conf"
@@ -16,7 +17,8 @@
   nics:
     - type: "private_network"
       ip: "192.168.56.20"
-  ram: "512"
+  ram: 400
+  count: 1
   scripts:
     - path: "provision/mysql-install.sh"
   dbuser: "mysql"
@@ -28,7 +30,8 @@
       ip: "192.168.56.200"
     - type: "public_network"
       ip: "192.168.1.200" #en0: Ethernet
-  ram: 512
+  count: 1
+  ram: 400
   files:
     file3:
       source: "lb/wordpress-loadbalancer.conf"

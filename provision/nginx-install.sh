@@ -1,5 +1,5 @@
 #!/bin/bash
-#install nginx
+# install nginx
 sudo apt-get update
 sudo apt-get -y install nginx
 # install php and wordpress dependencies
