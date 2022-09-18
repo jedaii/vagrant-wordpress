@@ -9,6 +9,9 @@ Vagrant.configure("2") do |config|
   servers.each do |servers|
     (1..servers['count']).each do |i|
       hostname = servers['name'] + i.to_s
+      if hostname.start_with?("wp")
+        count_vms = servers['count']
+      end
       config.vm.define hostname do |server|
         server.vm.box = "bento/ubuntu-20.04"
         servers['nics'].each do |nic|

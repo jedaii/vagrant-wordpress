@@ -13,6 +13,9 @@
   scripts:
     - path: "provision/nginx-install.sh"
     - path: "provision/wordpress-install.sh"
+  dbuser: "mysql"
+  dbpassword: "dbpassword"
+  dbname: "wordpress_db"
 - name: db
   nics:
     - type: "private_network"
