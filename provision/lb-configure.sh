@@ -6,5 +6,17 @@ sudo apt-get -y install nginx
 sudo rm /etc/nginx/sites-enabled/default
 sudo cp /tmp/wordpress-loadbalancer.conf /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/wordpress-loadbalancer.conf /etc/nginx/sites-enabled/wordpress-loadbalancer.conf
+# add wordpress servers for balancing
+three_octets=192.168.56.
+COUNT_VMS=2
+count=${COUNT_VMS}
+for ((i=0 ; i < $count ; i++)); do
+        echo $i
+        fourth_octet=$((10+$i))
+        vm_ip=${three_octets}${fourth_octet}
+        line_number=$(($i+2))
+        sudo sed -i "${line_number} i server ${vm_ip};" /etc/nginx/sites-available/wordpress-loadbalancer.conf
+done
+
 sudo nginx -t
 sudo systemctl reload nginx.service
