@@ -32,7 +32,7 @@
     - type: "private_network"
       ip: "192.168.56.200"
     - type: "public_network"
-      ip: "192.168.1.200" #en0: Ethernet
+      ip: "192.168.1.200"
   count: 1
   ram: 400
   files:
