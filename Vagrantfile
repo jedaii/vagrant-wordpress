@@ -5,12 +5,20 @@ require 'ipaddr'
 
 servers = YAML.load_file('servers.yaml')
 
+servers.each do |servers|
+  servers['nics'].each do |nic|
+    if servers['name'].start_with?("db")
+      $dbhost = nic['ip']
+    end
+  end
+end
+
 Vagrant.configure("2") do |config|
   servers.each do |servers|
     (1..servers['count']).each do |i|
       hostname = servers['name'] + i.to_s
       if hostname.start_with?("wp")
-        count_vms = servers['count']
+        $count_vms = servers['count']
       end
       config.vm.define hostname do |server|
         server.vm.box = "bento/ubuntu-20.04"
@@ -29,7 +37,9 @@ Vagrant.configure("2") do |config|
                 env: {
                   "DBUSER" => "#{servers['dbuser']}",
                   "DBPASSWORD" => "#{servers['dbpassword']}",
-                  "DBNAME" => "#{servers['dbname']}"
+                  "DBNAME" => "#{servers['dbname']}",
+                  "DBHOST" => $dbhost,
+                  "COUNT_VMS" => $count_vms
                 }
           end
         end

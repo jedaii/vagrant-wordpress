@@ -8,9 +8,7 @@ sudo cp /tmp/wordpress-loadbalancer.conf /etc/nginx/sites-available/
 sudo ln -s /etc/nginx/sites-available/wordpress-loadbalancer.conf /etc/nginx/sites-enabled/wordpress-loadbalancer.conf
 # add wordpress servers for balancing
 three_octets=192.168.56.
-COUNT_VMS=2
-count=${COUNT_VMS}
-for ((i=0 ; i < $count ; i++)); do
+for ((i=0 ; i < $COUNT_VMS ; i++)); do
         echo $i
         fourth_octet=$((10+$i))
         vm_ip=${three_octets}${fourth_octet}

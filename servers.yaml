@@ -6,10 +6,8 @@
   ram: 400
   count: 2
   files:
-    file1:
+    nginx-config:
       source: "wp/nginx/wordpress.conf"
-    file2:
-      source: "wp/wp-config.php"
   scripts:
     - path: "provision/nginx-install.sh"
     - path: "provision/wordpress-install.sh"
@@ -36,7 +34,7 @@
   count: 1
   ram: 400
   files:
-    file3:
+    nginx-config:
       source: "lb/wordpress-loadbalancer.conf"
   scripts:
     - path: "provision/lb-configure.sh"
